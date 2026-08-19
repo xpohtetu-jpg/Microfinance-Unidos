@@ -1,5 +1,7 @@
 # Microfinance Unidos — website
 
+**Live at [xpohtetu-jpg.github.io/Microfinance-Unidos](https://xpohtetu-jpg.github.io/Microfinance-Unidos/)**
+
 A static site. No build step, no dependencies, no framework. Open `index.html` in a browser and it works.
 
 ## Pages
@@ -63,12 +65,22 @@ says `[TODO]` on a live page.
 
 ## Deploying
 
-Any static host works. The simplest options:
+**GitHub Pages is already enabled**, serving `main` from the repository root. Any push to `main`
+redeploys automatically — usually live within a minute:
 
-**GitHub Pages** — push this folder to a repo, then Settings → Pages → deploy from `main` / root.
+```bash
+git add -A
+git commit -m "Update copy"
+git push
+```
 
-**Netlify or Cloudflare Pages** — drag the folder onto the dashboard. No build command, publish
-directory is the root.
+**To use your own domain** (e.g. `microfinanceunidos.org`): add it under Settings → Pages → Custom
+domain, then point a CNAME record at `xpohtetu-jpg.github.io` with your registrar. Worth doing before
+you email businesses — a real domain reads as more established than a github.io address, and it lets
+you set up a matching email address.
+
+**Other hosts** — Netlify or Cloudflare Pages both work; drag the folder onto the dashboard, no build
+command, publish directory is the root.
 
 To preview locally with a real server (needed only if you want clean URLs):
 
