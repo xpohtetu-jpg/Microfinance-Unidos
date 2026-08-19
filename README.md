@@ -1,0 +1,125 @@
+# Microfinance Unidos — website
+
+A static site. No build step, no dependencies, no framework. Open `index.html` in a browser and it works.
+
+## Pages
+
+| File | Purpose |
+| --- | --- |
+| `index.html` | Home — mission, the lending cycle, why it matters |
+| `about.html` | Who we are, principles, how a cycle works, transparency commitments |
+| `microfinance.html` | The educational centrepiece: what microfinance is, its history, the evidence, and honest criticisms |
+| `auction.html` | How the benefit auction works and where the proceeds go |
+| `partner.html` | **The page to link from outreach.** What we ask, what a business gets, contribution form, business FAQ |
+| `contact.html` | Contact details and a general enquiry form |
+
+Supporting files: `css/styles.css`, `js/main.js`, `assets/logo.svg`, `assets/favicon.svg`.
+
+---
+
+## Before you publish — three things to change
+
+### 1. The email address
+
+`hello@microfinanceunidos.org` is a placeholder and appears in several places. Replace every instance
+with your real address:
+
+```bash
+grep -rn "hello@microfinanceunidos.org" .
+```
+
+It appears in `partner.html` and `contact.html`, both as visible `mailto:` links and as the
+`data-mailto` attribute on the two forms.
+
+### 2. Connect the forms
+
+Both forms currently fall back to opening the visitor's email client with the message pre-filled.
+That works everywhere but loses submissions if someone has no mail client configured.
+
+To receive submissions properly, create a free endpoint at [formspree.io](https://formspree.io)
+(or Basin, Netlify Forms, Google Forms — anything that accepts a `POST`), then paste the URL into
+the `action` attribute of each form:
+
+```html
+<form class="form" data-form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" ...>
+```
+
+`js/main.js` detects a configured `action` and posts it in the background, showing a confirmation
+without leaving the page. Nothing else needs to change.
+
+### 3. Fill in the marked placeholders
+
+Search the HTML for `<!--` comments — each one marks a spot that needs your input:
+
+- `about.html` — template for adding named team members
+- `auction.html` — the "next auction" date/venue, and a contributor name wall once you have one
+- `partner.html` — the tax-deductibility answer, to be updated once you have 501(c)(3) determination
+- `contact.html` — social links and a mailing address
+
+The site is written so it reads correctly **as-is** if you publish before filling these in. Nothing
+says `[TODO]` on a live page.
+
+---
+
+## Deploying
+
+Any static host works. The simplest options:
+
+**GitHub Pages** — push this folder to a repo, then Settings → Pages → deploy from `main` / root.
+
+**Netlify or Cloudflare Pages** — drag the folder onto the dashboard. No build command, publish
+directory is the root.
+
+To preview locally with a real server (needed only if you want clean URLs):
+
+```bash
+python -m http.server 8000
+```
+
+Then open `http://localhost:8000`.
+
+---
+
+## Editing notes
+
+**Design tokens** live at the top of `css/styles.css` under `:root`. Changing `--clay` (the terracotta
+accent) or `--pine` (the deep green) re-themes the whole site.
+
+**The header and footer are duplicated in each HTML file.** That is deliberate — it keeps the site
+dependency-free. If you change a nav link, change it in all six files:
+
+```bash
+grep -ln "nav__links" *.html
+```
+
+**Adding a stat that counts up on scroll:**
+
+```html
+<p class="stat__figure"><span data-count-to="96" data-suffix="%">96%</span></p>
+```
+
+The fallback text inside the span is what shows if JavaScript is off, so write the final value there.
+
+**Adding an FAQ entry** — copy an existing `.accordion__item` block and give the button/panel a new
+matching `id` and `aria-controls` pair.
+
+---
+
+## A note on the content
+
+Every statistic on the site is attributed to a published source and linked:
+
+- World Bank *Global Findex Database 2025* — financial inclusion and unbanked figures
+- Inter-American Development Bank — MSME share of firms and the regional financing gap
+- Kiva — platform figures (founding year, $25 minimum, ~96% historical repayment, 90+ countries)
+- Banerjee, Karlan & Zinman (2015), *AEJ: Applied Economics* — the six randomised evaluations
+- Muhammad Yunus, Nobel Peace Prize lecture, 2006 — the quotation on the home page
+
+There are **no invented impact numbers** anywhere on the site — nothing claims a track record the
+organisation does not yet have. That is a feature, not an omission: a business deciding whether to
+trust a new nonprofit will check, and finding an honest "we are new, here is what we commit to"
+holds up far better than a number that does not survive scrutiny.
+
+The footer disclaimer on every page states that Microfinance Unidos is not affiliated with Kiva and
+that loans earn no return. Keep it there — it is the kind of detail that makes a careful reader
+decide you are legitimate.
