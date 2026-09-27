@@ -19,15 +19,14 @@ Supporting files: `css/styles.css`, `js/main.js`, `assets/logo.svg`, `assets/fav
 
 ---
 
-## Before you publish — three things to change
+## Before you publish — things to check
 
 ### 1. The email address
 
-`hello@microfinanceunidos.org` is a placeholder and appears in several places. Replace every instance
-with your real address:
+The site uses `microfinanceunidos@gmail.com`. To change it, replace every instance:
 
 ```bash
-grep -rn "hello@microfinanceunidos.org" .
+grep -rn "microfinanceunidos@gmail.com" .
 ```
 
 It appears in `partner.html` and `contact.html`, both as visible `mailto:` links and as the
