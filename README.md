@@ -32,21 +32,13 @@ grep -rn "microfinanceunidos@gmail.com" .
 It appears in `partner.html` and `contact.html`, both as visible `mailto:` links and as the
 `data-mailto` attribute on the two forms.
 
-### 2. Connect the forms
+### 2. The forms
 
-Both forms currently fall back to opening the visitor's email client with the message pre-filled.
-That works everywhere but loses submissions if someone has no mail client configured.
+Both forms post to Formspree (`https://formspree.io/f/mjykplvw`) and submissions arrive at the site's
+Gmail. A hidden `_subject` field tells them apart ("Auction contribution offer" vs "Website enquiry").
 
-To receive submissions properly, create a free endpoint at [formspree.io](https://formspree.io)
-(or Basin, Netlify Forms, Google Forms — anything that accepts a `POST`), then paste the URL into
-the `action` attribute of each form:
-
-```html
-<form class="form" data-form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" ...>
-```
-
-`js/main.js` detects a configured `action` and posts it in the background, showing a confirmation
-without leaving the page. Nothing else needs to change.
+`js/main.js` posts in the background and shows a confirmation without leaving the page. If a form's
+`action` is emptied, it falls back to opening the visitor's email client with the message pre-filled.
 
 ### 3. Fill in the marked placeholders
 

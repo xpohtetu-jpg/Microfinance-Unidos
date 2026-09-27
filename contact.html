@@ -116,16 +116,17 @@
             </p>
 
             <!--
-              CONNECTING THIS FORM: same as the contribution form on partner.html.
-              Paste a Formspree (or similar) endpoint into `action` and submissions
-              will post in the background. Until then it opens the visitor's email
-              client with the message pre-filled.
+              FORM: posts to Formspree (https://formspree.io/f/mjykplvw) in the
+              background via js/main.js. Submissions arrive at microfinanceunidos@gmail.com.
+              If `action` is emptied, it falls back to opening the visitor's email client.
             -->
             <form class="form" data-form
-                  action=""
+                  action="https://formspree.io/f/mjykplvw"
                   method="POST"
                   data-mailto="microfinanceunidos@gmail.com"
                   data-subject="Website enquiry">
+
+              <input type="hidden" name="_subject" value="Website enquiry">
 
               <div class="form__row">
                 <div class="field">

@@ -217,27 +217,17 @@
         <div class="reveal reveal-1">
           <div class="panel panel--flat">
             <!--
-              ============================================================
-              CONNECTING THIS FORM
-              ------------------------------------------------------------
-              As written, submitting opens the visitor's email client with
-              the details pre-filled (see data-mailto below). That works
-              everywhere but is not ideal.
-
-              To receive submissions properly, create a free endpoint at
-              formspree.io (or similar) and paste the URL into `action`:
-
-                  action="https://formspree.io/f/YOUR_FORM_ID"
-
-              The script in js/main.js will then post it in the background
-              and show a confirmation without leaving the page.
-              ============================================================
+              FORM: posts to Formspree (https://formspree.io/f/mjykplvw) in the
+              background via js/main.js. Submissions arrive at microfinanceunidos@gmail.com.
+              If `action` is emptied, it falls back to opening the visitor's email client.
             -->
             <form class="form" data-form
-                  action=""
+                  action="https://formspree.io/f/mjykplvw"
                   method="POST"
                   data-mailto="microfinanceunidos@gmail.com"
                   data-subject="Auction contribution offer">
+
+              <input type="hidden" name="_subject" value="Auction contribution offer">
 
               <div class="form__row">
                 <div class="field">
